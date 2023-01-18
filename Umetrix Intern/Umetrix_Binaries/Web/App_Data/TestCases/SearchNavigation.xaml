@@ -1,0 +1,52 @@
+﻿<Activity mc:Ignorable="sap sads" x:Class="Activity Builder"
+ xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities"
+ xmlns:a="clr-namespace:ActivityLibrary;assembly=ActivityLibrary"
+ xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+ xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities"
+ xmlns:s="clr-namespace:System;assembly=mscorlib"
+ xmlns:s1="clr-namespace:System;assembly=System.Core"
+ xmlns:s2="clr-namespace:System;assembly=System"
+ xmlns:s3="clr-namespace:System;assembly=System.ServiceModel"
+ xmlns:s4="clr-namespace:System;assembly=System.Runtime.WindowsRuntime"
+ xmlns:s5="clr-namespace:System;assembly=System.ComponentModel.Composition"
+ xmlns:sa="clr-namespace:System.Activities;assembly=System.Activities"
+ xmlns:sads="http://schemas.microsoft.com/netfx/2010/xaml/activities/debugger"
+ xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation"
+ xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib"
+ xmlns:scg1="clr-namespace:System.Collections.Generic;assembly=System.Core"
+ xmlns:scg2="clr-namespace:System.Collections.Generic;assembly=System"
+ xmlns:scg3="clr-namespace:System.Collections.Generic;assembly=System.ServiceModel"
+ xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="Result" Type="OutArgument(scg:Dictionary(x:String, scg:IList(x:String)))" />
+    <x:Property Name="LIST" Type="OutArgument(scg:IList(x:String))" />
+  </x:Members>
+  <sap:VirtualizedContainerService.HintSize>526.4,851.2</sap:VirtualizedContainerService.HintSize>
+  <mva:VisualBasic.Settings>Assembly references and imported namespaces for internal implementation</mva:VisualBasic.Settings>
+  <Sequence DisplayName="Default Template" sap:VirtualizedContainerService.HintSize="486.4,811.2">
+    <sap:WorkflowViewStateService.ViewState>
+      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+      </scg:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
+    <WriteLine sap:VirtualizedContainerService.HintSize="464,62.4" Text="Old and New version are included in same Test" />
+    <a:ReadLayoutAttribute AttributesToRead="app:actionViewClass" sap:VirtualizedContainerService.HintSize="464,22.4" Result="[Result]" XPath="//android.support.v7.widget.SearchView[@app:actionViewClass='android.support.v7.widget.SearchView']" />
+    <If Condition="[Result.count&gt;0]" sap:VirtualizedContainerService.HintSize="464,209.6">
+      <If.Then>
+        <a:WriteResponse sap:VirtualizedContainerService.HintSize="200,22.4" IsPassed="True" ResponseText="XML found" />
+      </If.Then>
+      <If.Else>
+        <a:WriteResponse sap:VirtualizedContainerService.HintSize="200,22.4" IsPassed="False" ResponseText="XML not found" />
+      </If.Else>
+    </If>
+    <a:SearchInCode sap:VirtualizedContainerService.HintSize="464,22.4" Result="[LIST]" SearchText="searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener()" />
+    <If Condition="[LIST.count&gt;0]" sap:VirtualizedContainerService.HintSize="464,209.6">
+      <If.Then>
+        <a:WriteResponse sap:VirtualizedContainerService.HintSize="200,22.4" IsPassed="True" ResponseText="JAVA found" />
+      </If.Then>
+      <If.Else>
+        <a:WriteResponse sap:VirtualizedContainerService.HintSize="200,22.4" IsPassed="False" ResponseText="JAVA not found" />
+      </If.Else>
+    </If>
+  </Sequence>
+</Activity>
